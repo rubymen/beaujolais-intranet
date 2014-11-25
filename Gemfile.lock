@@ -55,6 +55,7 @@ GEM
     execjs (2.2.2)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
+    high_voltage (2.2.1)
     hike (1.2.3)
     i18n (0.6.11)
     jquery-rails (3.1.2)
@@ -153,6 +154,7 @@ DEPENDENCIES
   devise
   devise-i18n-views
   friendly_id
+  high_voltage (~> 2.2.1)
   jquery-rails
   mysql2
   rails (= 4.1.6)
