@@ -27,9 +27,13 @@ class UsersController < ApplicationController
 
   def create
     authorize! :create, User
-    @user = User.new(user_params)
-    @user.save
-    respond_with(@user)
+    @user = User.new user_params
+
+    if @user.save
+      redirect_to users_path
+    else
+      render 'new'
+    end
   end
 
   def update
@@ -51,6 +55,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirm)
+    params.require(:user).permit(:email, :firstname, :lastname, :password, :password_confirmation, :type)
   end
 end
