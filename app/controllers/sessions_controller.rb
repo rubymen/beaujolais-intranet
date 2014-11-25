@@ -16,7 +16,7 @@ class SessionsController < Devise::SessionsController
       end
 
       format.json do
-        render json: { success: true } and return
+        render json: { success: resource } and return
       end
     end
   end
