@@ -39,7 +39,11 @@ class UsersController < ApplicationController
   def update
     authorize! :update, User
     @user.update(user_params)
-    respond_with(@user)
+    if @user.save
+      redirect_to users_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy

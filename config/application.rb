@@ -38,5 +38,11 @@ module BeaugolaisIntranet
     config.i18n.default_locale = :fr
     config.eager_load = true
 
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :delete, :put, :options]
+      end
+    end
   end
 end
