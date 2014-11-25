@@ -16,6 +16,7 @@ gem 'mysql2'
 gem 'rack-cors'
 gem 'sass-rails',           '~> 4.0.3'
 gem 'simple_form'
+gem 'simple_token_authentication'
 gem 'slim'
 gem 'slim-rails'
 gem 'spring',               group: :development

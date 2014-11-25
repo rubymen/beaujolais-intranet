@@ -24,7 +24,7 @@ class SessionsController < Devise::SessionsController
   def failure
     respond_to do |format|
       format.html do
-        redirect_to stored_location_for(scope) || after_sign_in_path_for(resource)
+        redirect_to new_user_session_path
       end
 
       format.json do
