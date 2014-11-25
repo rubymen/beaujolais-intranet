@@ -11,8 +11,8 @@ html
       .container-fluid
         .navbar-header
           a.navbar-brand href="/" Beaugolais Intranet
-
-    = yield
+    .container
+      = yield
 
     = javascript_include_tag 'application'
     = yield(:scripts)
