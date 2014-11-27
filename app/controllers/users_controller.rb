@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   respond_to :html, :json
 
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :reset]
 
   def index
     authorize! :read, User
@@ -57,6 +57,7 @@ class UsersController < ApplicationController
     authorize! :update, User
     respond_to do |format|
       format.html do
+        @user.send_reset_password_instructions
         redirect_to users_path
       end
 
