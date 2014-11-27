@@ -14,8 +14,19 @@ class SessionsController < Devise::SessionsController
   end
 
   def create
-    resource = warden.authenticate!(scope: resource_name, recall: 'sessions#failure')
-    sign_in_and_redirect(resource_name, resource)
+    cookies[:login_attempts] ||= 0
+
+    if params[:user][:email].blank? || params[:user][:password].blank?
+      cookies[:login_attempts] = cookies[:login_attempts].to_i + 1
+    end
+
+    if verify_recaptcha
+      cookies[:login_attempts] = 0
+      resource = warden.authenticate!(scope: resource_name, recall: 'sessions#failure')
+      sign_in_and_redirect(resource_name, resource)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def sign_in_and_redirect(resource_or_scope, resource=nil)

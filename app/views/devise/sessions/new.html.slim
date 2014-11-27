@@ -11,6 +11,9 @@
             = f.input :password, input_html: { class: 'form-control' }
           .form-group
             = f.input :remember_me, as: :boolean, class: 'form-control' if devise_mapping.rememberable?
+          - if cookies[:login_attempts].to_i >= 5
+            .form-group
+              = recaptcha_tags
 
         .form-actions
           = f.submit t('.sign_in'), class: 'btn btn-success'
