@@ -29,3 +29,11 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'forgery'
+  gem 'database_cleaner'
+end
