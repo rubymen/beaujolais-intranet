@@ -11,7 +11,10 @@ html
       .container-fluid
         .navbar-header
           a.navbar-brand href="/" Beaujolais Intranet
-          = link_to 'Déconnexion', destroy_session_path(:user), method: :delete
+        .collapse.navbar-collapse.navbar-right
+          ul.nav.navbar-nav
+            li
+              = link_to 'Déconnexion', destroy_session_path(:user), method: :delete
     .container
       = yield
 

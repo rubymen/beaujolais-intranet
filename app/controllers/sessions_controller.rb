@@ -1,5 +1,17 @@
 class SessionsController < Devise::SessionsController
   respond_to :html, :json
+  def new
+    if request.format.to_s == 'application/json'
+      if current_user.nil?
+        respond_to do |format|
+          format.json do
+            render json: {  }, status: 401 and return
+          end
+        end
+      end
+    end
+    super
+  end
 
   def create
     resource = warden.authenticate!(scope: resource_name, recall: 'sessions#failure')
@@ -29,7 +41,7 @@ class SessionsController < Devise::SessionsController
       end
 
       format.json do
-        render json: { success: false, errors: 'Login failed.' } and return
+        render json: {  }, status: 401 and return
       end
     end
   end
