@@ -11,16 +11,15 @@
         th Créé
         th Actions
 
-      - @users.each do |d|
-        - if current_user != d
-          tr
-            td= d.firstname
-            td= d.lastname
-            td= d.type
-            td= d.created_at
-            td
-              = link_to 'Editer', edit_user_path(d), class: 'btn btn-success'
-              = link_to 'Supprimer', user_path(d), method: :delete, class: 'btn btn-danger'
-              = link_to 'Réinitialiser le mot de passe', reset_user_path(d), class: 'btn btn-danger'
+      - @users.each do |user|
+        tr
+          td= user.firstname
+          td= user.lastname
+          td= user.type
+          td= user.created_at.to_date.to_s
+          td
+            = link_to 'Editer', edit_user_path(user), class: 'btn btn-success'
+            = link_to 'Supprimer', user_path(user), method: :delete, class: 'btn btn-danger'
+            = link_to 'Réinitialiser le mot de passe', reset_user_path(user), class: 'btn btn-danger'
   .col-sm-12
     = link_to 'Créer un utilisateur', new_user_url, class: 'btn btn-success'

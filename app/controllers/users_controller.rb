@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html, :json
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:new, :create, :new_password]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :reset]
 
   def index
@@ -24,10 +24,22 @@ class UsersController < ApplicationController
     authorize! :create, User
     @user = User.new user_params
 
-    if @user.save
-      redirect_to users_path
-    else
-      render 'new'
+    respond_to do |format|
+      format.html do
+        if @user.save
+          redirect_to users_path
+        else
+          render 'new'
+        end
+      end
+
+      format.json do
+        if @user.save
+          render json: @user, status: 200 and return
+        else
+          render json: @user, status: 400 and return
+        end
+      end
     end
   end
 
@@ -51,6 +63,10 @@ class UsersController < ApplicationController
         end
       end
     end
+  end
+
+  def new_password
+    current_user.reset_password!(params[:user][:password], params[:user][:password_confirmation])
   end
 
   def reset

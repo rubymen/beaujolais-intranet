@@ -3,12 +3,12 @@
     .col-md-12
       h2= t('.change_your_password')
 
-      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = simple_form_for(resource, as: resource_name, url: new_password_users_path, html: { method: :put }) do |f|
         = f.hidden_field :reset_password_token
 
         .form-inputs
-          = f.input :password, required: true, autofocus: true
-          = f.input :password_confirmation, label: t('.confirm_new_password'), required: true
+          = f.input :password, required: true, autofocus: true, input_html: { class: 'form-control' }
+          = f.input :password_confirmation, label: t('.confirm_new_password'), required: true, input_html: { class: 'form-control' }
 
         .form-actions
           = f.submit t('.change_my_password'), class: 'btn btn-success'

@@ -5,6 +5,7 @@ BeaugolaisIntranet::Application.routes.draw do
     resources :users do
       put :reset, on: :member
       get :reset, on: :member
+      put :new_password, on: :collection
     end
   end
 
