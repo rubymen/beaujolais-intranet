@@ -1,20 +1,26 @@
-h1 Gestion des utilisateurs
-= link_to 'Créer un utilisateur', new_user_url, class: 'btn btn-success'
-table.table
-  thead
-    th Nom
-    th Prénom
-    th Statut
-    th Créé
-    th Actions
+.row
+  .col-sm-12
+    h1 Gestion des utilisateurs
+.row
+  .col-sm-12
+    table.table.table-bordered
+      thead
+        th Nom
+        th Prénom
+        th Statut
+        th Créé
+        th Actions
 
-  - @users.each do |d|
-    - if current_user != d
-      tr
-        td= d.firstname
-        td= d.lastname
-        td= d.type
-        td= d.created_at
-        td
-          = link_to 'Editer', edit_user_path(d), class: 'btn btn-success'
-          = link_to 'Supprimer', user_path(d), method: :delete, class: 'btn btn-danger'
+      - @users.each do |d|
+        - if current_user != d
+          tr
+            td= d.firstname
+            td= d.lastname
+            td= d.type
+            td= d.created_at
+            td
+              = link_to 'Editer', edit_user_path(d), class: 'btn btn-success'
+              = link_to 'Supprimer', user_path(d), method: :delete, class: 'btn btn-danger'
+              = link_to 'Réinitialiser le mot de passe', reset_user_path(d), class: 'btn btn-danger'
+  .col-sm-12
+    = link_to 'Créer un utilisateur', new_user_url, class: 'btn btn-success'

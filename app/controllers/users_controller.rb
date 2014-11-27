@@ -10,11 +10,6 @@ class UsersController < ApplicationController
     respond_with(@users)
   end
 
-  def show
-    authorize! :read, User
-    respond_with(@user)
-  end
-
   def new
     authorize! :create, User
     @user = User.new
@@ -39,10 +34,39 @@ class UsersController < ApplicationController
   def update
     authorize! :update, User
     @user.update(user_params)
-    if @user.save
-      redirect_to users_path
-    else
-      render 'edit'
+    respond_to do |format|
+      format.html do
+        if @user.save
+          redirect_to users_path
+        else
+          render 'edit'
+        end
+      end
+
+      format.json do
+        if @user.save
+          render json: @user, status: 200 and return
+        else
+          render json: @user, status: 400 and return
+        end
+      end
+    end
+  end
+
+  def reset
+    authorize! :update, User
+    respond_to do |format|
+      format.html do
+        redirect_to users_path
+      end
+
+      format.json do
+        if @user.send_reset_password_instructions
+          render json: @user, status: 200 and return
+        else
+          render json: @user, status: 400 and return
+        end
+      end
     end
   end
 

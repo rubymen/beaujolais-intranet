@@ -2,7 +2,9 @@ BeaugolaisIntranet::Application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
   scope '/manage' do
-    resources :users
+    resources :users do
+      put :reset, on: :member
+    end
   end
 
 end
